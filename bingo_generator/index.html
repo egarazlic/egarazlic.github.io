@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bingo Generator</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+<div>
+    Max Number &nbsp<input type="text" id="number">
+    <input type="button" id="start_btn"value="Select">
+    <br><span id="error_number" style="color:red"></span>
+</div>
+<div id="select_select_game_holder">
+
+</div>
+</body>
+<script>
+
+    var isprime=function(n)
+    {
+        for(var i=2;i<n;i++)
+            if(n%i==0)return false;
+        return true;
+    };
+    var generate=function(max_per,ticket,max_num)
+    {
+        var matrix=new Array();
+        for(var i=0;i<ticket_num;i++)
+        {
+            matrix.push(new Array());
+        }
+        var segments=max_per/2;
+        for(var i=0;i<matrix.length;i++)
+        {
+
+        }
+    };
+    $(document).ready(function(){
+        $('#start_btn').click(function(){
+            x=$('#number').val();
+            console.log(x);
+           holder=$("#select_select_game_holder");
+           for(var i=6;i<x/4;i++)
+           {
+               holder.append("<input type='radio' class='options' name='hamo' value='"+i+"'>"+i+"/"+x);
+               if((i-5)%3==0)holder.append("<br>");
+           }
+            $('.options').click(function(){
+                max_per=$(this).val();
+                max_num=$('#number').val();
+                var ticket_num=parseInt(max_num/max_per);
+
+            });
+        });
+   });
+
+
+
+</script>
+</html>
