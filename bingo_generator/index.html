@@ -17,23 +17,68 @@
 </body>
 <script>
 
-    var isprime=function(n)
+    function isprime(n)
     {
         for(var i=2;i<n;i++)
             if(n%i==0)return false;
         return true;
     };
-    var generate=function(max_per,ticket,max_num)
+    function calculate_prime_per_ticket(max_per,ticket_num,max_num)
+    {
+        var count=0;
+        for(var i=0;i<max_num;i++)
+        {
+           if(isprime(i))
+               count++;
+        }
+        return count/ticket_num;
+    };
+
+    function if_exist(random_poll,teste)
+    {
+        for(var i=0;i<random_poll.length;i++)
+            if(random_poll[i]==teste)return true;
+        return false;
+    }
+    function generate_poll(max_num)
+    {
+        var random_pull=new Array();
+        while(random_pull.length<parseInt(max_num))
+        {
+            var try_x=Math.floor((Math.random() * parseInt(max_num)) + 1);
+            if(!if_exist(random_pull,try_x))random_pull.push(try_x);
+        }
+        return random_pull;
+    }
+    function can_fit(array_check,max_per,ticket_num,max_num,teste)
+    {
+        var segment_count=max_per/3;
+        var max_primes=calculate_prime_per_ticket(max_per,ticket_num,max_num);
+        var count_primes=0;
+        for(var i=0;i<array_check.length;i++)
+            if(isprime(array_check[i]))count_primes++;
+        var segment=
+
+    }
+    var generate=function(max_per,ticket_num,max_num)
     {
         var matrix=new Array();
         for(var i=0;i<ticket_num;i++)
         {
             matrix.push(new Array());
         }
-        var segments=max_per/2;
-        for(var i=0;i<matrix.length;i++)
+        pool=generate_poll(max_num);
+        while(pool.length!=0)
         {
+            var try_x=pool.pop();
+            for(var i=0;i<matrix.length;i++)
+            {
+            if(can_fit(matrix[i],max_per,ticket_num,max_num,try_x))
+            {
 
+            }
+            }
+            //pool.unshift(try_x);
         }
     };
     $(document).ready(function(){
@@ -50,7 +95,7 @@
                 max_per=$(this).val();
                 max_num=$('#number').val();
                 var ticket_num=parseInt(max_num/max_per);
-
+                generate_poll(max_num);
             });
         });
    });
